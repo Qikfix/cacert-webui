@@ -38,7 +38,7 @@ def sign_csr_cert():
         command = "run.py"
         print()
         print(command)
-        process = subprocess.Popen(['python', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # stdout_data, stderr_data = process.communicate(input=input_to_send)
         stdout_data, stderr_data = process.communicate()
@@ -185,7 +185,7 @@ def create_the_root_certificate(main_dir):
         command = "run.py"
         print()
         print(command)
-        process = subprocess.Popen(['python', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         stdout_data, stderr_data = process.communicate(input=input_to_send)
         print(f"stdout: {stdout_data}")
@@ -271,7 +271,7 @@ def create_the_intermediate_certificate(main_dir, password):
         command = "run.py"
         print()
         print(command)
-        process = subprocess.Popen(['python', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         stdout_data, stderr_data = process.communicate(input=input_to_send)
         print(f"stdout: {stdout_data}")
@@ -294,7 +294,7 @@ def create_the_intermediate_certificate(main_dir, password):
         command = "run.py"
         print()
         print(command)
-        process = subprocess.Popen(['python', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         stdout_data, stderr_data = process.communicate(input=input_to_send)
         print(f"stdout: {stdout_data}")
@@ -380,7 +380,7 @@ def create_the_certificate_chain(main_dir):
         command = "run.py"
         print()
         print(command)
-        process = subprocess.Popen(['python', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         stdout_data, stderr_data = process.communicate()
         print(f"stdout: {stdout_data}")
@@ -396,6 +396,9 @@ def create_the_certificate_chain(main_dir):
 
 def download_bundle_from_intermediate():
     
+    if not os.path.exists("static/"):
+        os.mkdir("static/")
+
     if os.path.exists("static/ca-chain.cert.pem"):
         print("removing and copying")
         os.remove("static/ca-chain.cert.pem")
