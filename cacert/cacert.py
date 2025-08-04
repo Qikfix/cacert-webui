@@ -28,7 +28,7 @@ def sign_csr_cert():
 
     input_to_send = b"\n\n\n\n\n\n\n"
     try:
-        command = "openssl x509 -req -in " + uploaded_cert_csr + " -CA " + main_dir + "/certs/ca.cert.pem -CAkey " + main_dir + "/private/ca.key.pem -out " + output_signed_file + " -days 500 -sha256 -passin pass:waldirio123"
+        command = "openssl x509 -req -in " + uploaded_cert_csr + " -CA " + main_dir + "/certs/ca.cert.pem -CAkey " + main_dir + "/private/ca.key.pem -out " + output_signed_file + " -days 500 -sha256 -passin pass:waldirio123 -CAcreateserial"
 
         template = env.get_template('run.py.template')
         output = template.render(command=command)
