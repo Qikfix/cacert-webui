@@ -1,0 +1,15 @@
+<a href="/">Main</a>
+<br>
+<h1>Sign CSR</h1>
+
+<form action="/sign_csr" method="post" enctype="multipart/form-data">
+
+    <input type="file" name="file[]">
+    <br>
+    <input type="submit" value="Upload and Sign">
+
+</form>
+
+{% if is_file %}
+Download Signed Cert <a href="/static/signed.crt">Here</a>
+{% endif %}
