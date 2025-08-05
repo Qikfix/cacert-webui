@@ -17,6 +17,34 @@ env = Environment(loader=file_loader)
 
 UPLOAD_FOLDER = "uploads"
 
+def verify_signed_certificate():
+    """
+    docstring here
+    """
+    try:
+        command = [
+            "openssl",
+            "x509",
+            "-noout",
+            "-text",
+            "-in",
+            "/tmp/signed.crt"
+        ]
+        result = subprocess.run(command, capture_output=True, text=True, check=True)
+        print(result.stdout)
+
+    except subprocess.CalledProcessError as e:
+        print(e)
+    except FileNotFoundError:
+        print("openssl not found")
+
+    try:
+        if result.stdout:
+            return result.stdout
+    except:
+        return "Nothing here yet!"
+
+
 def sign_csr_cert():
     # openssl x509 -req -in ../satellite_cert/satellite_cert_csr.pem -CA certs/ca.cert.pem -CAkey private/ca.key.pem -out /tmp/satellite_cert/satellite.crt -days 500 -sha256
     # openssl x509 -req -in /uploads/FILE_NAME_HERE -CA MAIN_DIR/certs/ca.cert.pem -CAkey MAIN_DIR/private/ca.key.pem -out /static/SIGNED.CRT -days 500 -sha256
@@ -402,10 +430,18 @@ def download_bundle_from_intermediate():
     if os.path.exists("static/ca-chain.cert.pem"):
         print("removing and copying")
         os.remove("static/ca-chain.cert.pem")
-        shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
+        try:
+            shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
+        except FileNotFoundError as err:
+            return err
     else:
         print("just copying")
-        shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
+        # shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
+        try:
+            shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
+        except FileNotFoundError as err:
+            return err
+
 
 def view_bundle_from_intermediate():
     with open("static/ca-chain.cert.pem", "r") as file:

@@ -1,15 +1,16 @@
-<a href="/">Main</a>
-<br>
-<h1>Download Bundle</h1>
+{% extends 'web_template.html' %}
+
+{% block content %}
+<h3>Download Bundle</h3>
 <br>
 <a href="/static/ca-chain.cert.pem">Download bundle</a>
 <br>
 <a href="/download_bundle?view=yes">View bundle</a>
-
-<br>
-
+{% if response %}
+<br><br>
+<hr>
 <pre>
-
 {{ response }}
-
 </pre>
+{% endif %}
+{% endblock %}

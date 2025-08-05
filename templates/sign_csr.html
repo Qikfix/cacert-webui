@@ -1,6 +1,8 @@
-<a href="/">Main</a>
+{% extends 'web_template.html' %}
+
+{% block content %}
+<h3>Sign CSR</h3>
 <br>
-<h1>Sign CSR</h1>
 
 <form action="/sign_csr" method="post" enctype="multipart/form-data">
 
@@ -11,5 +13,18 @@
 </form>
 
 {% if is_file %}
+<br>
 Download Signed Cert <a href="/static/signed.crt">Here</a>
+<br>
+View Signed Cert <a href="/sign_csr?view=yes">Here</a>
+
+{% if response %}
+<hr>
+<pre>
+{{ response }}
+</pre>
 {% endif %}
+
+{% endif %}
+
+{% endblock %}
