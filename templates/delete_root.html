@@ -1,9 +1,12 @@
-<a href="/">Main</a>
-<br>
-<h1>Delete Root?</h1>
+{% extends 'web_template.html' %}
 
+{% block content %}
+<h3>Delete Root?</h3>
+<br>
 <form action="/delete_root" method="post">
     <button type="submit">Delete!</button>
     <input text name="delete_root" value="yes" hidden></input>
 
 </form>
+
+{% endblock %}

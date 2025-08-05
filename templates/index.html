@@ -1,11 +1,18 @@
-delete the root - <a href="/delete_root">delete root</a>
-<p>
-delete the intermediate - <a href="/delete_intermediate">delete intermediate</a>
-<p>
-create root folder - <a href="/root">create</a> - <a href="/verify_root">verify</a>
-<p>
-create intermediate folder - <a href="/intermediate">create</a> - <a href="/verify_intermediate">verify</a> - <a href="/verify_intermediate_against_root">verify against root</a>
-<p>
-download bundle - <a href="/download_bundle">download</a>
-<p>
-Sign the CSR (certificate signing request) - <a href="/sign_csr">download</a>
+{% extends 'web_template.html' %}
+
+{% block content %}
+<div align="center">
+Welcome,
+<p></p>
+This is a project that will help you with your Root CA / Intermediate CA / Signing Process!
+<p></p>
+Here, you will see in action, most of the steps shared in the article provided by <a href="http://jamielinux.com/docs/openssl-certificate-authority/index.html" target="_blank">Jamie Nguyen</a>
+<p></p>
+I really hope you enjoy it, and feedback will be very welcome! 
+<p></p>
+Feel free to send me an email - <a href="mailto:waldirio@gmail.com">waldirio@gmail.com</a>
+<p></p>
+Cheers
+<br>Waldirio / Wally
+</div>
+{% endblock %}

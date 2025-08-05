@@ -1,9 +1,11 @@
-<a href="/">Main</a>
-<br>
-<h1>Delete Intermediate?</h1>
+{% extends 'web_template.html' %}
 
+{% block content %}
+<h3>Delete Intermediate?</h3>
+<br>
 <form action="/delete_intermediate" method="post">
     <button type="submit">Delete!</button>
     <input text name="delete_intermediate" value="yes" hidden></input>
 
 </form>
+{% endblock %}

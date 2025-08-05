@@ -25,17 +25,18 @@ def sign_csr():
     if request.method == "GET":
         # download_bundle_from_intermediate()
 
-        # if request.args.get('view') == "yes":
-        #     print("here we are")
-        #     response = view_bundle_from_intermediate()
-        #     return render_template("download_bundle.html", response = response)
+        response = None
+        if request.args.get('view') == "yes":
+            print("here we are")
+            response = verify_signed_certificate()
+            # return render_template("download_bundle.html", response = response)
 
         if os.path.exists("static/signed.crt"):
             is_file = True
         else:
             is_file = False
 
-        return render_template('sign_csr.html', is_file=is_file)
+        return render_template('sign_csr.html', is_file=is_file, response=response)
 
     if request.method == 'POST':
         files = request.files.getlist('file[]')
@@ -50,14 +51,14 @@ def download_bundle():
     docstring here
     """
     if request.method == "GET":
-        download_bundle_from_intermediate()
+        response = download_bundle_from_intermediate()
 
         if request.args.get('view') == "yes":
             print("here we are")
             response = view_bundle_from_intermediate()
             return render_template("download_bundle.html", response = response)
 
-        return render_template('download_bundle.html')
+        return render_template('download_bundle.html', response=response)
 
 
 @app.route("/delete_intermediate", methods=['GET', 'POST'])
@@ -72,7 +73,7 @@ def delete_intermediate():
         delete_response = delete_root_folder(response, main_dir + "/intermediate")
         if delete_response is not True:
             return render_template('error.html', msg=delete_response)
-        return redirect('/')
+        return redirect('/intermediate_ca')
 
 
 @app.route("/delete_root", methods=['GET', 'POST'])
@@ -87,7 +88,7 @@ def delete_root():
         delete_response = delete_root_folder(response, main_dir)
         if delete_response is not True:
             return render_template('error.html', msg=delete_response)
-        return redirect('/')
+        return redirect('/root_ca')
 
 @app.route("/verify_intermediate_against_root", methods=['GET', 'POST'])
 def verify_intermediate_against_root():
@@ -157,7 +158,7 @@ def root():
         create_the_root_key(main_dir, "private/ca.key.pem", password="waldirio123")
         create_the_root_certificate(main_dir)
         # result_verify = verify_the_root_certificate(main_dir)
-        return redirect("/")
+        return redirect("/root_ca")
 
     return render_template('root.html')
 
@@ -197,7 +198,7 @@ def intermediate():
         # Create the certificate chain file
         create_the_certificate_chain(main_dir)
 
-        return redirect("/")
+        return redirect("/intermediate_ca")
 
     return render_template('intermediate.html')
 
@@ -208,3 +209,31 @@ def index():
     docstring here
     """
     return render_template('index.html')
+
+@app.route("/web")
+def web():
+    """
+    docstring here
+    """
+    return render_template('web_template.html')
+
+@app.route("/root_ca")
+def root_ca():
+    """
+    docstring here
+    """
+    return render_template('root_ca.html')
+
+@app.route("/intermediate_ca")
+def intermediate_ca():
+    """
+    docstring here
+    """
+    return render_template('intermediate_ca.html')
+
+@app.route("/github")
+def github():
+    """
+    docstring here
+    """
+    return render_template('github.html')
