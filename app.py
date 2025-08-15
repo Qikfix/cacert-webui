@@ -193,7 +193,10 @@ def intermediate():
         create_the_intermediate_key(main_dir + "/intermediate", password="waldirio123")
 
         # Create the intermediate certificate
-        create_the_intermediate_certificate(main_dir + "/intermediate", password="waldirio123")
+        response = create_the_intermediate_certificate(main_dir + "/intermediate", password="waldirio123")
+        print(f"DEBUG RESPONSE: {response}")
+        if response is not True:
+            return render_template('error.html', msg=response)
 
         # Create the certificate chain file
         create_the_certificate_chain(main_dir)

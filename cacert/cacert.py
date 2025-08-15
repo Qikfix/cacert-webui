@@ -158,7 +158,8 @@ def prepare_the_directory(main_dir, kind=None):
 
 
 # Prepare the configuration file
-def prepare_the_configuration_file(dir, countryName="CA", stateOrProvinceName="British Columbia", localityName="Vancouver", organizationName="Wally's ACME", organizationalUnitName="IT", commonName="", emailAddress="user@king.lab", private_key="ca.key.pem", certificate="ca.cert.pem", crl="ca.crl.pem", policy="policy_strict"):
+# def prepare_the_configuration_file(dir, countryName="CA", stateOrProvinceName="British Columbia", localityName="Vancouver", organizationName="Wally's ACME", organizationalUnitName="IT", commonName="", emailAddress="user@king.lab", private_key="ca.key.pem", certificate="ca.cert.pem", crl="ca.crl.pem", policy="policy_strict"):
+def prepare_the_configuration_file(dir, countryName="CA", stateOrProvinceName="British Columbia", localityName="Vancouver", organizationName="Wally's ACME", organizationalUnitName="IT", commonName="", emailAddress="user@king.lab", private_key="ca.key.pem", certificate="ca.cert.pem", crl="ca.crl.pem", policy="policy_loose"):
     """
     docstring here
     """
@@ -305,10 +306,11 @@ def create_the_intermediate_certificate(main_dir, password):
         print(f"stdout: {stdout_data}")
         print(f"stderr: {stderr_data}")
 
-    except subprocess.CalledProcessError as e:
-        print(e)
+    except subprocess.CalledProcessError as err:
+        print(err)
+        return err
     except FileNotFoundError:
-        print("openssl not found")
+        print("python3 not found")
 
     input_to_send = b"y\ny\n"
     try:
@@ -328,13 +330,20 @@ def create_the_intermediate_certificate(main_dir, password):
         print(f"stdout: {stdout_data}")
         print(f"stderr: {stderr_data}")
 
-    except subprocess.CalledProcessError as e:
-        print(e)
+        # if stderr_data is not None:
+        #     print("DEBUG: ENTREI AQUI!")
+        #     return stderr_data
+
+    except subprocess.CalledProcessError as err:
+        print(err)
+        return err
     except FileNotFoundError:
-        print("openssl not found")
+        print("python3 not found")
 
     #  wally
     os.chmod(main_dir + "/certs/intermediate.cert.pem", 0o444)
+
+    return True
 
 
 def verify_the_intermediate_certificate(main_dir):
