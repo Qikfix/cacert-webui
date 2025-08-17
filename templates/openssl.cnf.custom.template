@@ -1,0 +1,49 @@
+[ req ]
+req_extensions = v3_req
+distinguished_name = req_distinguished_name
+prompt = no
+
+[ v3_req ]
+basicConstraints = CA:FALSE
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[ alt_names ]
+{% if dns1 %}
+DNS.1 = {{ dns1 }}
+{% endif %}
+
+{% if dns2 %}
+DNS.2 = {{ dns2 }}
+{% endif %}
+
+{% if dns3 %}
+DNS.3 = {{ dns3 }}
+{% endif %}
+
+[ req_distinguished_name ]
+commonName = {{ commonName }}
+{% if CN %}
+CN = {{ CN }}
+{% endif %}
+
+{% if countryName %}
+countryName = {{ countryName }}
+{% endif %}
+
+{% if stateOrProvinceName %}
+stateOrProvinceName = {{ stateOrProvinceName }}
+{% endif %}
+
+{% if localityName %}
+localityName = {{ localityName }}
+{% endif %}
+
+{% if organizationName %}
+organizationName = {{ organizationName }}
+{% endif %}
+
+{% if organizationalUnitName %}
+organizationalUnitName = {{ organizationalUnitName }}
+{% endif %}

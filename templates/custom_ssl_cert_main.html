@@ -1,0 +1,20 @@
+{% extends 'web_template.html' %}
+
+{% block content %}
+<h3>Create Custom SSL Cert Main Page</h3>
+<br>
+<a href="/custom_ssl_certificate_create">Create Custom SSL Cert</a>
+<br>
+<a href="/custom_ssl_certificate_main?view=yes">View Files</a>
+{% if response %}
+<hr>
+<pre>
+{% for b in response%}
+Common Name .......................: <strong>{{ b }}</strong> <a href="custom_ssl_certificate_delete?delete=yes&cn={{ b }}">Delete Me</a>
+CNF Conf File .....................: openssl.cnf - <a href="/static/custom_ssl_certs/{{ b }}/openssl.cnf">Link</a>
+Private Key .......................: {{ b }}.pem - <a href="/static/custom_ssl_certs/{{ b }}/{{ b }}.pem">Link</a>
+CSR (Certificate Signing Request) .: csr_{{ b }}.pem - <a href="/static/custom_ssl_certs/{{ b }}/csr_{{ b }}.pem">Link</a>
+{% endfor %}
+</pre>
+{% endif %}
+{% endblock %}

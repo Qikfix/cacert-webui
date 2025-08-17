@@ -22,16 +22,19 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
         <li class="nav-item">
-          <a class="nav-link" href="/root_ca">Root CA</a>
+          <a class="nav-link" href="/root_main">Root CA</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/intermediate_ca">Intermediate CA</a>
+          <a class="nav-link" href="/intermediate_main">Intermediate CA</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/download_bundle">Bundle</a>
+          <a class="nav-link" href="/bundle_main">Bundle</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/sign_csr">Sign Certificate</a>
+          <a class="nav-link" href="/sign_certificate_main">Sign Certificate</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/custom_ssl_certificate_main">Custom SSL Cert</a>
         </li>
       </ul>
         <ul class="navbar-nav ms-auto mt-2">
@@ -45,7 +48,11 @@
 <br>
 <br>
 <br>
-{% block content%}{% endblock %}
+
+  <!-- <div class="container-sm"> -->
+  <div class="container-fluid">
+    {% block content%}{% endblock %}
+  </div>
 
 <br><br>
 

@@ -1,3 +1,3 @@
 import os
-print(f"FULL CoMMAND HERE: cat /tmp/wally/intermediate/certs/intermediate.cert.pem /tmp/wally/certs/ca.cert.pem > /tmp/wally/intermediate/certs/ca-chain.cert.pem")
-os.system("cat /tmp/wally/intermediate/certs/intermediate.cert.pem /tmp/wally/certs/ca.cert.pem > /tmp/wally/intermediate/certs/ca-chain.cert.pem")
+print(f"FULL CoMMAND HERE: openssl ca -config DATA/intermediate/openssl.cnf -extensions server_cert -days 300 -notext -md sha256 -in /tmp/uploaded_cert_csr.pem -out /tmp/signed.crt -passin pass:waldirio123")
+os.system("openssl ca -config DATA/intermediate/openssl.cnf -extensions server_cert -days 300 -notext -md sha256 -in /tmp/uploaded_cert_csr.pem -out /tmp/signed.crt -passin pass:waldirio123")
