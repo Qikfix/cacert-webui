@@ -2,7 +2,6 @@
 docstring here
 """
 
-import ssl
 import shutil
 import os
 import subprocess
