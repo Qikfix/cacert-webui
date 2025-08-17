@@ -1,0 +1,48 @@
+{% extends 'web_template.html' %}
+
+{% block content %}
+<h3>Root</h3>
+<br>
+
+<form action="/root_create" method="post">
+
+    <table class="table table-border table-sm">
+      <tr>
+        <th>Fields</th>
+        <th>Values</th>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td><input name="countryName" value="GB" size="40"></td>
+      </tr>
+      <tr>
+        <td>State or Province</td>
+        <td><input name="stateOrProvinceName" value="England" size="40"></td>
+      </tr>
+      <tr>
+        <td>Locality</td>
+        <td><input name="localityName" value="" size="40"></td>
+      </tr>
+      <tr>
+        <td>Organization Name</td>
+        <td><input name="organizationName" value="Alice Ltd" size="40"></td>
+      </tr>
+      <tr>
+        <td>Organization Unit</td>
+        <td><input name="organizationalUnitName" value="Alice Ltd Certificate Authority" size="40"></td>
+      </tr>
+      <tr>
+        <td>Common Name</td>
+        <td><input name="commonName" value="Alice Ltd Root CA" size="40"></td>
+      </tr>
+      <tr>
+        <td>Email Address</td>
+        <td><input name="emailAddress" value="waldirio@gmail.com" size="40"></td>
+      </tr>
+
+    </table>
+  <button type="submit">Submit</button>
+
+</form>
+
+{% endblock %}

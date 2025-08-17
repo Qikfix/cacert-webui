@@ -6,6 +6,7 @@
 default_ca = CA_default
 
 [ CA_default ]
+copy_extensions = copy
 # Directory and file locations.
 # wally
 # dir               = /root/ca

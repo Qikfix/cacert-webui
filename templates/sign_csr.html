@@ -4,7 +4,7 @@
 <h3>Sign CSR</h3>
 <br>
 
-<form action="/sign_csr" method="post" enctype="multipart/form-data">
+<form action="/sign_certificate_main" method="post" enctype="multipart/form-data">
 
     <input type="file" name="file[]">
     <br>
@@ -16,8 +16,9 @@
 <br>
 Download Signed Cert <a href="/static/signed.crt">Here</a>
 <br>
-View Signed Cert <a href="/sign_csr?view=yes">Here</a>
-
+View Signed Cert <a href="/sign_certificate_main?view=yes">Here</a>
+<br>
+Delete Old files <a href="/sign_certificate_main?delete_files=yes">Here</a>
 {% if response %}
 <hr>
 <pre>
@@ -25,6 +26,25 @@ View Signed Cert <a href="/sign_csr?view=yes">Here</a>
 </pre>
 {% endif %}
 
+{% endif %}
+
+
+{% if stdout_data %}
+stdout_data
+<pre>
+---
+{{ stdout_data }}
+---
+</pre>
+{% endif %}
+
+{% if stderr_data %}
+stderr_data
+<pre>
+---
+{{ stderr_data }}
+---
+</pre>
 {% endif %}
 
 {% endblock %}

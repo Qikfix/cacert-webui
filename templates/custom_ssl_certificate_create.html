@@ -1,0 +1,55 @@
+{% extends 'web_template.html' %}
+
+{% block content %}
+<h3>Create Custom SSL Certificate</h3>
+<br>
+
+<form action="/custom_ssl_certificate_create" method="post">
+
+    <table class="table table-border table-sm">
+      <tr>
+        <th>Fields</th>
+        <th>Values</th>
+      </tr>
+      <tr>
+        <td>DNS1 *</td>
+        <td><input name="dns1" size="40" required></td>
+      </tr>
+      <tr>
+        <td>DNS2</td>
+        <td><input name="dns2" size="40"></td>
+      </tr>
+      <tr>
+        <td>DNS3</td>
+        <td><input name="dns3" size="40"></td>
+      </tr>
+      <tr>
+        <td>Common Name *</td>
+        <td><input name="commonName" value="satellite.king.lab" size="40" required></td>
+      </tr>
+      <tr>
+        <td>Country</td>
+        <td><input name="countryName" size="40"></td>
+      </tr>
+      <tr>
+        <td>State pr Province</td>
+        <td><input name="stateOrProvinceName" size="40"></td>
+      </tr>
+      <tr>
+        <td>Locality</td>
+        <td><input name="localityName" size="40"></td>
+      </tr>
+      <tr>
+        <td>Organization Name</td>
+        <td><input name="organizationName" size="40"></td>
+      </tr>
+      <tr>
+        <td>Organization Unit</td>
+        <td><input name="organizationalUnitName" size="40"></td>
+      </tr>
+
+    </table>
+    <button type="submit">Submit</button>
+</form>
+
+{% endblock %}
