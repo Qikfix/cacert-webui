@@ -503,10 +503,96 @@ def download_bundle_from_intermediate():
 
 
 def view_bundle_from_intermediate():
+    # context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    # context.load_verify_locations(static + "ca-chain.cert.pem")
+    # complete_chain = context.get_ca_certs()
+    # for b in complete_chain:
+        # print(f"AUDIT: Chain: {b['issuer']}")
+
+    chain_list = []
+    chain_final_list = []
+    l_stage = []
+    str_stage = ""
+    control = False
+
     with open("static/ca-chain.cert.pem", "r") as file:
-        return file.read()
-        # print(file)
-    # return os.system("cat static/ca-chain.cert.pem")
+        for line in file:
+            if "BEGIN" in line or control is True:
+                control = True
+                print(f"== {line}")
+                l_stage.append(line)
+
+            if "END" in line and control is True:
+                # print(f"== {line}")
+                control = False
+                # l_stage.append(line)
+                chain_list.append(str_stage.join(l_stage))
+                # chain_list.append(l_stage)
+                l_stage = []
+                
+            # pass
+            # return file.read()
+
+
+    # print(f"AUDIT: chain_list")
+    # print(f"AUDIT: chain_list: {chain_list}")
+
+    for b in chain_list:
+        # print(f"AUDIT:")
+        # print(f"{b}")
+        temp_file = "/tmp/xpto"
+        with open(temp_file, "w") as temp_file:
+            temp_file.write(b)
+
+        
+        # aux = os.system(command)
+        # print(f"AUDIT: AUX: {aux}")
+
+        # input_to_send = b"y\ny\n"
+        try:
+            # command = "openssl ca -config  " + main_dir + "/../openssl.cnf -extensions v3_intermediate_ca -days 3650 -notext -md sha256 -in  " + main_dir + "/csr/intermediate.csr.pem -passin pass:" + password + " -out  " + main_dir + "/certs/intermediate.cert.pem"
+            command = "openssl x509 -noout -subject -issuer -in /tmp/xpto"
+
+            template = env.get_template('run.py.template')
+            output = template.render(command=command)
+            with open("run.py", "w") as fp:
+                print(output, file=fp)
+
+            command = "run.py"
+            print()
+            print(command)
+            process = subprocess.Popen(['python3', command], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+            stdout_data, stderr_data = process.communicate()
+            # stdout_data, stderr_data = process.communicate(input=input_to_send)
+            print(f"stdout: {stdout_data}")
+            print(f"stderr: {stderr_data}")
+
+            # if stderr_data is not None:
+            #     print("DEBUG: ENTREI AQUI!")
+            #     return stderr_data
+
+        except subprocess.CalledProcessError as err:
+            print(err)
+            return err
+        except FileNotFoundError:
+            print("python3 not found")
+        
+        chain_final_list.append(str(stdout_data, encoding='utf-8'))
+        chain_final_list.append(b)
+
+
+
+    for b in chain_final_list:
+        print(f"AUDIT: Final Chain List")
+        print(f"{b}")
+
+    # with open("static/ca-chain.cert.pem", "r") as file:
+    #     return file.read()
+
+
+    return chain_final_list
+
 
 # Main
 
