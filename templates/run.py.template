@@ -1,3 +1,3 @@
 import os
-print(f"FULL CoMMAND HERE: {{ command }}")
+#print(f"FULL CoMMAND HERE: {{ command }}")
 os.system("{{ command }}")

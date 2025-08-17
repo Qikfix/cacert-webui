@@ -10,7 +10,9 @@
 <br><br>
 <hr>
 <pre>
-{{ response }}
+{% for b in response%}
+{{ b }}
+{% endfor %}
 </pre>
 {% endif %}
 {% endblock %}
