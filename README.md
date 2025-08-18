@@ -142,6 +142,12 @@ At this moment, I'm not using all of them, but for sure, the nomenclature helped
   - https://jinja.palletsprojects.com/
 
 
+#### Container Friendly
+Soon, I'll add the steps that you can follow, and just download the container, which will allow you to be executing this environment, with no further work. If you are already a `podman` or `docker` user, it should be very easy for you.
+
+I'll keep you posted about it!
+
+
 #### How to Contribute?
 Please, feel free to share your ideas, feedbacks, via Issue on this project, or even via email `waldirio@gmail.com`. It will be a pleasure, and very welcome.
 
