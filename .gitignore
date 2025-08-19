@@ -4,3 +4,4 @@
 *pycache*
 DATA/*
 static/custom_ssl_certs/*
+.DS*

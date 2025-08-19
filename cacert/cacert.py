@@ -492,15 +492,16 @@ def download_bundle_from_intermediate():
         try:
             shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
         except FileNotFoundError as err:
-            return err
+            return "Error", err
     else:
         print("just copying")
         # shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
         try:
             shutil.copy(main_dir + "/intermediate/certs/ca-chain.cert.pem", "static/ca-chain.cert.pem")
         except FileNotFoundError as err:
-            return err
+            return "Error", err
 
+    return True, "top"
 
 def view_bundle_from_intermediate():
     # context = ssl.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
