@@ -3,10 +3,21 @@
 {% block content %}
 <h3>Download Bundle</h3>
 <br>
+
+{% if response == "Error" %}
+<strong>No bundle available at this moment! You need to create the ROOT CA and Intermediate CA</strong>
+<br>
+<br>
+{{ msg }}
+{% endif %}
+
+{% if response != "Error" %}
 <a href="/static/ca-chain.cert.pem">Download bundle</a>
 <br>
 <a href="/bundle_main?view=yes">View bundle</a>
-{% if response %}
+{% endif %}
+
+{% if response != "Error" and msg != "top" %}
 <br><br>
 <hr>
 <pre>

@@ -61,14 +61,15 @@ def bundle_main():
     docstring here
     """
     if request.method == "GET":
-        response = download_bundle_from_intermediate()
+        response, msg = download_bundle_from_intermediate()
+        print(f"AUDIT: response value: {response}, {msg}")
 
         if request.args.get('view') == "yes":
             print("here we are")
             response = view_bundle_from_intermediate()
             return render_template("download_bundle.html", response = response)
 
-        return render_template('download_bundle.html', response=response)
+        return render_template('download_bundle.html', response=response, msg=msg)
 
 
 @app.route("/intermediate_delete", methods=['GET', 'POST'])
