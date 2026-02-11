@@ -166,7 +166,7 @@ dnf install podman -y
 ```
 - Execute the container
 ```
-podman run -d --rm --name pdf-plus -p 5000:5000 ghcr.io/waldirio/cacert-webui:latest
+podman run -d --rm --name cacert-webui -p 5000:5000 ghcr.io/waldirio/cacert-webui:latest
 ```
 
 And now, you should be able to access your application via http://localhost:5000
