@@ -133,6 +133,52 @@ At this moment, I'm not using all of them, but for sure, the nomenclature helped
   - Function responsible for listing all the `custom certs`, based on the `directory` listing.
 
 
+# To Deploy via Virtual Environment
+- Create a Python Virtual Environment
+```
+python3 -m venv ~/.venv/cacert-webui
+```
+- Load the Virtual Environment
+```
+source ~/.venv/cacert-webui/bin/activate
+(cacert-webui) user@local ~ %
+```
+- Clone the repo
+```
+git clone https://github.com/Qikfix/cacert-webui.git
+cd cacert-webui
+```
+- Install the Python Modules via Requirements.txt
+```
+pip install -r requirements.txt
+```
+- Start the Application
+```
+flask run --debug
+...
+* Running on http://127.0.0.1:5000
+```
+
+# To Deploy the Container Using Podman
+- Install podman
+```
+dnf install podman -y
+```
+- Execute the container
+```
+podman run -d --rm --name pdf-plus -p 5000:5000 ghcr.io/waldirio/cacert-webui:latest
+```
+
+And now, you should be able to access your application via http://localhost:5000
+
+
+### You can also pull the image using docker
+- To pull the image
+```
+docker pull ghcr.io/waldirio/cacert-webui:latest
+```
+
+
 #### References:
 - Python
   - https://docs.python.org/
